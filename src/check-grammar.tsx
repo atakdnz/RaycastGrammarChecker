@@ -59,7 +59,7 @@ export default function CheckGrammar({ initialText = "" }: CheckGrammarProps) {
       await HistoryManager.saveCheck(
         values.text,
         result.corrected,
-        result.issues.length,
+        result.issues,
       );
 
       toast.style = Toast.Style.Success;

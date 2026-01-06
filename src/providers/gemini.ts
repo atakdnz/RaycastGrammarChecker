@@ -47,7 +47,8 @@ export class GeminiProvider implements LLMProvider {
                   properties: {
                     type: {
                       type: "string",
-                      description: "Type of issue: grammar, spelling, punctuation, or style",
+                      description:
+                        "Type of issue: grammar, spelling, punctuation, or style",
                     },
                     severity: {
                       type: "string",
@@ -66,7 +67,13 @@ export class GeminiProvider implements LLMProvider {
                       description: "Explanation of why this is an issue",
                     },
                   },
-                  required: ["type", "severity", "original", "correction", "explanation"],
+                  required: [
+                    "type",
+                    "severity",
+                    "original",
+                    "correction",
+                    "explanation",
+                  ],
                 },
               },
             },
@@ -78,7 +85,9 @@ export class GeminiProvider implements LLMProvider {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Gemini API error: ${response.statusText} - ${errorText}`);
+      throw new Error(
+        `Gemini API error: ${response.statusText} - ${errorText}`,
+      );
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

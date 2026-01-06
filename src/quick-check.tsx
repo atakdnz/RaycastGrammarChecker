@@ -44,10 +44,17 @@ export default function QuickCheck() {
       // Quick check uses casual style by default for lighter corrections
       const checkResult = await provider.analyzeText(textToCheck, "casual");
 
-      await HistoryManager.saveCheck(textToCheck, checkResult.corrected, checkResult.issues.length);
+      await HistoryManager.saveCheck(
+        textToCheck,
+        checkResult.corrected,
+        checkResult.issues,
+      );
 
       setResult(checkResult);
-      await showToast(Toast.Style.Success, `Found ${checkResult.issues.length} issue(s)`);
+      await showToast(
+        Toast.Style.Success,
+        `Found ${checkResult.issues.length} issue(s)`,
+      );
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
       if (errorMessage.includes("Unable to get selected text")) {
@@ -79,7 +86,9 @@ export default function QuickCheck() {
   }
 
   if (isLoading) {
-    return <Detail isLoading={true} markdown="Analyzing your text for issues..." />;
+    return (
+      <Detail isLoading={true} markdown="Analyzing your text for issues..." />
+    );
   }
 
   if (!result) {

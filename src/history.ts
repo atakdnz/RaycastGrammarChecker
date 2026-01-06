@@ -1,11 +1,12 @@
 import { LocalStorage } from "@raycast/api";
+import { Issue } from "./api";
 
 export interface HistoryItem {
   id: string;
   date: string;
   original: string;
   corrected: string;
-  issuesCount: number;
+  issues: Issue[];
 }
 
 const HISTORY_KEY = "grammar-check-history";
@@ -15,7 +16,7 @@ export class HistoryManager {
   static async saveCheck(
     original: string,
     corrected: string,
-    issuesCount: number,
+    issues: Issue[],
   ): Promise<void> {
     const history = await HistoryManager.getHistory();
     const newItem: HistoryItem = {
@@ -23,7 +24,7 @@ export class HistoryManager {
       date: new Date().toISOString(),
       original,
       corrected,
-      issuesCount,
+      issues,
     };
 
     const updatedHistory = [newItem, ...history].slice(0, MAX_HISTORY_ITEMS);
